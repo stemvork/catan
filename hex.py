@@ -17,7 +17,7 @@ from lib import *
 
 # Fallback size definition
 SIZE  = 30
-INSET = 3
+INSET = 2
 
 
 def hex_corner(center, i, size=SIZE, flat=False):
@@ -32,7 +32,8 @@ def hex_corner(center, i, size=SIZE, flat=False):
             center[1] + size * math.sin(angle_rad))
 
 
-def draw_hex(screen, center, size=SIZE, absolute=False, flat=False):
+def draw_hex(screen, center, color=WHITE, size=SIZE,  
+        absolute=False, flat=False):
     # Calculate the center pixel coordinate from grid coordinate
     # Unless the absolute flag is True
     if not absolute:
@@ -54,7 +55,7 @@ def draw_hex(screen, center, size=SIZE, absolute=False, flat=False):
 
     # Actually draw the hexes to the screen
     _pts = [hex_corner(center, i, size - INSET) for i in range(6)]
-    pygame.draw.polygon(screen, COLOURS[0], _pts)
+    pygame.draw.polygon(screen, color, _pts)
 
 
 def ring_list(w):
@@ -67,4 +68,33 @@ def draw_big_hex(screen, n=2, size=SIZE):
 
     for _h in hexes:
         draw_hex(screen, _h)
+
+def color_test(screen, _cl=COLOURS):
+    # _idx = [(0, 0), (2, 0), (4, 0)]
+    _idx = ring_list(2)
+    [draw_hex(screen, c, COLOURS[k]) for k, c in zip(COLOURS, _idx)]
+
+def base_map_color_test(screen):
+    _cl = [ "ore"
+          , "wool"
+          , "lumber"
+          , "grain"
+          , "brick"
+          , "wool"
+          , "brick"
+          , "brick"
+          , "lumber"
+          , "desert"
+          , "lumber"
+          , "ore"
+          , "lumber"
+          , "ore"
+          , "grain"
+          , "wool"
+          , "brick"
+          , "grain"
+          , "wool"
+          ]
+    [draw_hex(screen, c, COLOURS[k]) for k, c in zip(_cl, ring_list(2))]
+    
 

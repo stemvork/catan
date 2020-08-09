@@ -16,21 +16,27 @@ FPS         = 30              # Frames per second
 
 # Colour definitions in RGB
 WHITE       = (255, 255, 255)
-BLACK       = (0, 0, 0)
 BG          = (20, 40, 80)
 
 
 # Colour definitions, list of HEX values 
-COLOURS = [ "#ff0000"
-          , "#00ff00"
-          , "#0000ff"
-          , "#ffff00"
-          , "#ff00ff"
-          , "#00ffff"
-          ]
+COLOURS  =  { "red": "#ff0000"
+            , "green": "#00ff00"
+            , "blue": "#0000ff"
+            , "yellow": "#ffff00"
+            , "magenta": "#ff00ff"
+            , "cyan": "#00ffff"
+            , "sea": "#2d84c9"
+            , "desert": "#AF944D"
+            , "brick": "#904D14"
+            , "ore": "#6A647D"
+            , "grain": "#FFC847"
+            , "wool": "#98CE00"
+            , "lumber": "#3C5200"
+            }
 
 # Convert them to pygame colors (RGB)
-COLOURS = [pygame.Color(c) for c in COLOURS]
+COLOURS = {k: pygame.Color(v) for k, v in COLOURS.items()}
 
 # Setup the screen and timing
 if DEBUG:
