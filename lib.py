@@ -30,6 +30,8 @@ COLOURS  =  { "red": "#ff0000"
             , "yellow": "#ffff00"
             , "magenta": "#ff00ff"
             , "cyan": "#00ffff"
+            , "orange": "#ff9900"
+            , "lightblue": "#0099FF"
             , "sea": "#2d84c9"
             , "desert": "#AF944D"
             , "brick": "#904D14"
@@ -47,7 +49,7 @@ if DEBUG:
     screen = pygame.display.set_mode(SCREENDIM)
 else:
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-pygame.display.set_caption("Kolonisten v0.2")
+pygame.display.set_caption("Kolonisten v0.3")
 clock = pygame.time.Clock()
 
 

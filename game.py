@@ -20,6 +20,12 @@ def hex_middle(center, i, size=SIZE, flat=False):
 
     return (a[0] + b[0]) // 2, (a[1] + b[1]) // 2
 
+def corner_of(screen, n, i):
+    return hex_corner(get_tile_center(screen, n), i)
+
+def middle_of(screen, n, i):
+    return hex_middle(get_tile_center(screen, n), i)
+
 def ring_list(w=2):
     return [(abs(j) + 2*i, j) 
                 for j in range(-w, w+1)
@@ -72,7 +78,7 @@ def base_map_color_test(screen):
           ]
     [draw_hex(screen, c, COLOURS[k]) for k, c in zip(_cl, ring_list())]
     
-def base_structs(screen):
+def structs_test(screen):
     [draw_house(screen, hex_corner(get_center(), i))
             for i in range(6)]
     [draw_bar(screen, hex_middle(get_center(), i), i)
@@ -82,6 +88,26 @@ def base_structs(screen):
     [draw_church(screen, hex_corner(get_tile_center(screen, 8), i))
             for i in range(2, 6)]
 
+def base_structs(screen):
+    draw_house(screen, corner_of(screen, 8, 5))
+    draw_house(screen, corner_of(screen, 8, 3), colour=COLOURS["red"])
+    draw_house(screen, corner_of(screen, 12, 1), colour=COLOURS["lightblue"])
+    draw_house(screen, corner_of(screen, 13, 1), colour=COLOURS["orange"])
+
+    draw_bar(screen, middle_of(screen, 8, 4), 4)
+    draw_bar(screen, middle_of(screen, 8, 2), 2, colour=COLOURS["red"])
+    draw_bar(screen, middle_of(screen, 16, 5), 5, colour=COLOURS["lightblue"])
+    draw_bar(screen, middle_of(screen, 17, 5), 5, colour=COLOURS["orange"])
+
+    draw_house(screen, corner_of(screen, 10, 1))
+    draw_house(screen, corner_of(screen, 0, 1), colour=COLOURS["red"])
+    draw_house(screen, corner_of(screen, 14, 1), colour=COLOURS["lightblue"])
+    draw_house(screen, corner_of(screen, 5, 0), colour=COLOURS["orange"])
+
+    draw_bar(screen, middle_of(screen, 10, 0), 0)
+    draw_bar(screen, middle_of(screen, 1, 2), 2, colour=COLOURS["red"])
+    draw_bar(screen, middle_of(screen, 15, 3), 3, colour=COLOURS["lightblue"])
+    draw_bar(screen, middle_of(screen, 5, 5), 5, colour=COLOURS["orange"])
 
 def get_tile_center(screen, n):
     coord = ring_list()[n]

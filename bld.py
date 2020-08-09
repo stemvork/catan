@@ -1,10 +1,10 @@
 from lib import *
 
-def draw_weird_convex(screen, center, size=SIZE):
+def draw_weird_convex(screen, center, size=SIZE, colour=WHITE):
     _pts = [(0, 0), (50, 0), (25, 25), (50, 75), (0, 25)]
     draw_with_outline(screen, center, _pts)
 
-def draw_house(screen, center=get_center(), size=SIZE):
+def draw_house(screen, center=get_center(), size=SIZE, colour=WHITE):
     # Some constants
     _s   = size // 8
     hy   = round(_s * 4/5)
@@ -21,7 +21,7 @@ def draw_house(screen, center=get_center(), size=SIZE):
            , (hw, -hy)
            , (hw, hy)
            ]
-    draw_with_outline(screen, _pts, center)
+    draw_with_outline(screen, _pts, center, colour)
 
 
     # Triangle
@@ -30,7 +30,7 @@ def draw_house(screen, center=get_center(), size=SIZE):
            , (0, -ht)
            , (-hw, -hy)
            ]
-    draw_with_outline(screen, _pts, center)
+    draw_with_outline(screen, _pts, center, colour)
 
 
     # Side roof
@@ -40,7 +40,7 @@ def draw_house(screen, center=get_center(), size=SIZE):
            , (0, -ht)
            , (hw, -hy)
            ]
-    draw_with_outline(screen, _pts, center)
+    draw_with_outline(screen, _pts, center, colour)
 
 
     # Side house
@@ -50,9 +50,9 @@ def draw_house(screen, center=get_center(), size=SIZE):
            , (hw, -hy)
            , (hw, hy)
            ]
-    draw_with_outline(screen, _pts, center)
+    draw_with_outline(screen, _pts, center, colour)
 
-def draw_bar(screen, center, i, size=SIZE):
+def draw_bar(screen, center, i, size=SIZE, colour=WHITE):
     # Some constants
     _s   = size // 8
     hy   = round(_s * 4/5)
@@ -67,10 +67,10 @@ def draw_bar(screen, center, i, size=SIZE):
            , (hw, hy)
            ]
     _pts = [rotate_point(p, 90 + 60*i) for p in _pts]
-    draw_with_outline(screen, _pts, center)
+    draw_with_outline(screen, _pts, center, colour)
 
 
-def draw_church(screen, center, size=SIZE):
+def draw_church(screen, center, size=SIZE, colour=WHITE):
     # Some constants
     _s   = size // 7
     hy   = round(_s * 4/5)
@@ -92,4 +92,4 @@ def draw_church(screen, center, size=SIZE):
            , (hw, hy)
            ]
     _pts = [(p[0], p[1]+dy) for p in _pts]
-    draw_with_outline(screen, _pts, center)
+    draw_with_outline(screen, _pts, center, colour)
