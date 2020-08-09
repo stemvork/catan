@@ -1,11 +1,6 @@
 from lib import *
 
 
-# Fallback size definition
-SIZE  = 30
-INSET = 2
-
-
 # Base functions
 def hex_corner(center, i, size=SIZE, flat=False):
     if flat:

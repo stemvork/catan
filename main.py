@@ -1,5 +1,6 @@
 from lib import *
 from hex import * 
+from bld import *
 
 
 # Game loop
@@ -18,6 +19,8 @@ while True:
     # Draw something to the screen buffer
     screen.fill(COLOURS["sea"])
     base_map_color_test(screen)
+
+    draw_house(screen, hex_corner(get_center(), 3))
 
     # Display the new frame and wait for next game loop
     pygame.display.flip()

@@ -2,6 +2,7 @@ import pygame
 import sys
 import random
 import math
+from itertools import tee
 
 
 # Needed to initialise e.g. font module
@@ -12,10 +13,13 @@ pygame.init()
 SCREENDIM   = (400, 400)      # Test dimensions
 DEBUG       = True            # Development vs. production
 FPS         = 30              # Frames per second
+SIZE  = 30
+INSET = 2
 
 
 # Colour definitions in RGB
 WHITE       = (255, 255, 255)
+BLACK       = (0, 0, 0)
 BG          = (20, 40, 80)
 
 
@@ -51,3 +55,17 @@ clock = pygame.time.Clock()
 def proper_exit():
     pygame.quit()
     sys.exit()
+
+def pairwise(iterable):
+    a, b = tee(iterable)
+    next(b, None)
+    return zip(a, b)
+
+def draw_with_outline(screen, pts, center=(0, 0)):
+    pts = [(p[0]+center[0], p[1]+center[1]) for p in pts]
+    pygame.draw.polygon(screen, WHITE, pts)
+    for a, b in pairwise(pts):
+        pygame.draw.line(screen, BLACK, a, b)
+
+def get_center():
+    return tuple(map(lambda x: x //2, screen.get_rect().size))
