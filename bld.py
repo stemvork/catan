@@ -4,16 +4,15 @@ def draw_weird_convex(screen, center, size=SIZE):
     _pts = [(0, 0), (50, 0), (25, 25), (50, 75), (0, 25)]
     draw_with_outline(screen, center, _pts)
 
-def draw_house(screen, center=list(map(lambda x: x // 2,
-        screen.get_rect().size)), size=SIZE):
-
+def draw_house(screen, center=get_center(), size=SIZE):
 
     # Some constants
-    _s   = SIZE // 4
+    _s   = size // 8
     hy   = round(_s * 4/5)
     hw   = round(_s * 7/8)
     ht   = round(_s * 9/4)
     htt  = round(_s * 11/4)
+    center = center[0] - _s, center[1] + _s 
 
 
     # Front face
@@ -54,4 +53,19 @@ def draw_house(screen, center=list(map(lambda x: x // 2,
            ]
     draw_with_outline(screen, _pts, center)
 
+def draw_bar(screen, center, i, size=SIZE):
+    # Some constants
+    _s   = size // 8
+    hy   = round(_s * 4/5)
+    hw   = round(_s * 18/8)
 
+
+    # Bar
+    _pts = [ (hw, hy)
+           , (-hw, hy)
+           , (-hw, -hy)
+           , (hw, -hy)
+           , (hw, hy)
+           ]
+    _pts = [rotate_point(p, 90 + 60*i) for p in _pts]
+    draw_with_outline(screen, _pts, center)

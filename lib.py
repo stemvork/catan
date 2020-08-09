@@ -13,8 +13,8 @@ pygame.init()
 SCREENDIM   = (400, 400)      # Test dimensions
 DEBUG       = True            # Development vs. production
 FPS         = 30              # Frames per second
-SIZE  = 30
-INSET = 2
+SIZE        = 400 // 9
+INSET       = 2
 
 
 # Colour definitions in RGB
@@ -61,11 +61,18 @@ def pairwise(iterable):
     next(b, None)
     return zip(a, b)
 
-def draw_with_outline(screen, pts, center=(0, 0)):
+def draw_with_outline(screen, pts, center=(0, 0), color=WHITE):
     pts = [(p[0]+center[0], p[1]+center[1]) for p in pts]
-    pygame.draw.polygon(screen, WHITE, pts)
+    pygame.draw.polygon(screen, color, pts)
     for a, b in pairwise(pts):
         pygame.draw.line(screen, BLACK, a, b)
 
 def get_center():
     return tuple(map(lambda x: x //2, screen.get_rect().size))
+
+def rotate_point(p, a):
+    rot_deg = 45
+    rot_rad = math.pi / 180 * a
+    c = math.cos(rot_rad)
+    s = math.sin(rot_rad)
+    return p[0] * c - p[1] * s, p[0] * s + p[1] * c

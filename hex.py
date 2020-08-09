@@ -13,6 +13,12 @@ def hex_corner(center, i, size=SIZE, flat=False):
     return (center[0] + size * math.cos(angle_rad),
             center[1] + size * math.sin(angle_rad))
 
+def hex_middle(center, i, size=SIZE, flat=False):
+    a = hex_corner(center, i, size, flat)
+    b = hex_corner(center, i+1, size, flat)
+
+    return (a[0] + b[0]) // 2, (a[1] + b[1]) // 2
+
 def ring_list(w):
     return [(abs(j) + 2*i, j) 
                 for j in range(-w, w+1)

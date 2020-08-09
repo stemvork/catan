@@ -19,8 +19,11 @@ while True:
     # Draw something to the screen buffer
     screen.fill(COLOURS["sea"])
     base_map_color_test(screen)
-
-    draw_house(screen, hex_corner(get_center(), 3))
+    
+    [draw_house(screen, hex_corner(get_center(), i))
+            for i in range(6)]
+    [draw_bar(screen, hex_middle(get_center(), i), i)
+            for i in range(6)]
 
     # Display the new frame and wait for next game loop
     pygame.display.flip()
