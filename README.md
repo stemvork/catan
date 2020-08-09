@@ -2,10 +2,10 @@
 Python (pygame) collaboration project, to implement a boardgame.
 
 ## Task list
-- [ ] Find the manual of _Kolonisten van Catan_.
-    - https://www.catan.com/service/game-rules
+- [x] Find the manual of _Kolonisten van Catan_.
+    - [x] https://www.catan.com/service/game-rules
 - [ ] Draw some basic shapes.
-    - Hexagon and hexagon rings.
+    - [x] Hexagon and hexagon rings.
     - [ ] Colours
     - [ ] Settlement
     - [ ] Road
