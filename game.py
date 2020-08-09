@@ -24,26 +24,13 @@ def ring_list(w=2):
     return [(abs(j) + 2*i, j) 
                 for j in range(-w, w+1)
                 for i in range(-w, w+1-abs(j))]
+
 def draw_hex(screen, center, color=WHITE, size=SIZE,  
         absolute=False, flat=False):
     # Calculate the center pixel coordinate from grid coordinate
     # Unless the absolute flag is True
     if not absolute:
-
-
-        # Calculate some derived dimensions
-        _w = math.sqrt(3) * size
-        _h = 2 * size
-        _x = _w
-        _y = _h * 3 // 4
-
-
-        # Draw odd rows with offset to the right
-        center = (_x * center[0] // 2 \
-                      + screen.get_rect().width // 2, 
-                  _y * center[1]\
-                      + screen.get_rect().height // 2)
-
+        center = calculate_center(screen, center)
 
     # Actually draw the hexes to the screen
     _pts = [hex_corner(center, i, size - INSET) for i in range(6)]
@@ -90,9 +77,12 @@ def base_structs(screen):
             for i in range(6)]
     [draw_bar(screen, hex_middle(get_center(), i), i)
             for i in range(6)]
-    # [draw_church(screen, hex_corner(get_center(), i))
-    #         for i in range(6)]
+    [draw_bar(screen, hex_middle(get_tile_center(screen, 8), i), i)
+            for i in range(1, 6)]
+    [draw_church(screen, hex_corner(get_tile_center(screen, 8), i))
+            for i in range(2, 6)]
 
 
-def get_tile_coord(n):
-    return ring_list()[n]
+def get_tile_center(screen, n):
+    coord = ring_list()[n]
+    return calculate_center(screen, coord)

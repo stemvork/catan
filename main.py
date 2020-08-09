@@ -2,6 +2,9 @@ from lib import *
 from game import * 
 
 
+current = 0
+
+
 # Game loop
 while True:
 
@@ -13,6 +16,11 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
                 proper_exit()
+            elif event.key == pygame.K_SPACE:
+                if current < 18:
+                    current += 1
+                else:
+                    current = 0
 
 
     # Draw something to the screen buffer

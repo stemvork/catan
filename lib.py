@@ -47,7 +47,7 @@ if DEBUG:
     screen = pygame.display.set_mode(SCREENDIM)
 else:
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-pygame.display.set_caption("Kolonisten v0.1")
+pygame.display.set_caption("Kolonisten v0.2")
 clock = pygame.time.Clock()
 
 
@@ -76,3 +76,18 @@ def rotate_point(p, a):
     c = math.cos(rot_rad)
     s = math.sin(rot_rad)
     return p[0] * c - p[1] * s, p[0] * s + p[1] * c
+
+def calculate_center(screen, center, size=SIZE):
+    # Calculate some derived dimensions
+    _w = math.sqrt(3) * size
+    _h = 2 * size
+    _x = _w
+    _y = _h * 3 // 4
+
+
+    # Draw odd rows with offset to the right
+    center = (_x * center[0] // 2 \
+                  + screen.get_rect().width // 2, 
+              _y * center[1]\
+                  + screen.get_rect().height // 2)
+    return center
