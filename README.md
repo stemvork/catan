@@ -4,8 +4,8 @@ Python (pygame) collaboration project, to implement a boardgame.
 ## Task list v0.2
 - [ ] Work on the Catan structures.
     - [ ] City (church)
-    - [ ] Settlement (house)
-    - [ ] Road (bar)
+    - [x] Settlement (house)
+    - [x] Road (bar)
     
 ## Task list v0.1
 - [x] Find the manual of _Kolonisten van Catan_.
