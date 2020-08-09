@@ -1,25 +1,12 @@
 from lib import *
 
 
-# W = math.sqrt(3) * size
-# H = 2 * size
-# X = W
-# Y = H * 3/4
-
-
-# On axial and cube coords
-# The cube coord (x, y, z)
-# reads axially  (q, s, r)
-# where s is often calculated
-# from x + y + z = 0 or
-# from s = -q-r
-
-
 # Fallback size definition
 SIZE  = 30
 INSET = 2
 
 
+# Base functions
 def hex_corner(center, i, size=SIZE, flat=False):
     if flat:
         angle_deg = 60 * i
@@ -31,7 +18,10 @@ def hex_corner(center, i, size=SIZE, flat=False):
     return (center[0] + size * math.cos(angle_rad),
             center[1] + size * math.sin(angle_rad))
 
-
+def ring_list(w):
+    return [(abs(j) + 2*i, j) 
+                for j in range(-w, w+1)
+                for i in range(-w, w+1-abs(j))]
 def draw_hex(screen, center, color=WHITE, size=SIZE,  
         absolute=False, flat=False):
     # Calculate the center pixel coordinate from grid coordinate
@@ -57,18 +47,14 @@ def draw_hex(screen, center, color=WHITE, size=SIZE,
     _pts = [hex_corner(center, i, size - INSET) for i in range(6)]
     pygame.draw.polygon(screen, color, _pts)
 
-
-def ring_list(w):
-    return [(abs(j) + 2*i, j) 
-                for j in range(-w, w+1)
-                for i in range(-w, w+1-abs(j))]
-
 def draw_big_hex(screen, n=2, size=SIZE):
     hexes = ring_list(n)
 
     for _h in hexes:
         draw_hex(screen, _h)
 
+
+# Higher-level or testing functions
 def color_test(screen, _cl=COLOURS):
     # _idx = [(0, 0), (2, 0), (4, 0)]
     _idx = ring_list(2)

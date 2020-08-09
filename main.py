@@ -17,10 +17,6 @@ while True:
 
     # Draw something to the screen buffer
     screen.fill(COLOURS["sea"])
-    # for i in range(-2, 3):
-    #     for j in range(-2, 3):
-    #         draw_hex(screen, (i, j))
-    draw_big_hex(screen)
     base_map_color_test(screen)
 
     # Display the new frame and wait for next game loop
