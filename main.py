@@ -17,10 +17,10 @@ while True:
 
     # Draw something to the screen buffer
     screen.fill(BG)
-    pygame.draw.rect(screen, COLOURS[0], (15, 15, 15, 15))
-
-    draw_hex(screen, (150, 150), 50)
-
+    # for i in range(-2, 3):
+    #     for j in range(-2, 3):
+    #         draw_hex(screen, (i, j))
+    draw_big_hex(screen)
 
     # Display the new frame and wait for next game loop
     pygame.display.flip()
