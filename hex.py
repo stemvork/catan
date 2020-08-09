@@ -1,4 +1,5 @@
 from lib import *
+from bld import *
 
 
 # Base functions
@@ -85,3 +86,8 @@ def base_map_color_test(screen):
     [draw_hex(screen, c, COLOURS[k]) for k, c in zip(_cl, ring_list(2))]
     
 
+def base_structs(screen):
+    [draw_house(screen, hex_corner(get_center(), i))
+            for i in range(6)]
+    [draw_bar(screen, hex_middle(get_center(), i), i)
+            for i in range(6)]

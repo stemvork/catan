@@ -5,7 +5,6 @@ def draw_weird_convex(screen, center, size=SIZE):
     draw_with_outline(screen, center, _pts)
 
 def draw_house(screen, center=get_center(), size=SIZE):
-
     # Some constants
     _s   = size // 8
     hy   = round(_s * 4/5)
