@@ -2,7 +2,11 @@
 Python (pygame) collaboration project, to implement a boardgame.
 
 ## Task list v0.4
-- [ ] Implement feature #1
+- [ ] Add dice and roll them.
+- [ ] Add resource cards and deal them based on dice.
+- [ ] Learn about initial resource cards and deal them.
+- [ ] Display the resource cards of the local player.
+- [ ] Debug-display the total number of dealt resource cards.
 
 ## Task list v0.3
 - [x] Add resource tokens and the robber. 
