@@ -108,3 +108,16 @@ def draw_robber(screen, center, size=SIZE):
         cx - rhw//2-1, cy - 3*rhh//7 - 3*rh//5, rhw + 1, rhh))
     pygame.draw.rect(screen, BLACK, (
         cx - rw//2, cy + 3*rh//7 - rbh//2, rw, rbh))
+
+def draw_res(screen, center, amount, size=SIZE):
+    pygame.draw.circle(screen, COLOURS["desert"], center, RESSIZE)
+    [gd.aacircle(screen, *tuple(map(round, center)), RESSIZE, BLACK)
+            for c in range(-1, 1)]
+    if amount in [2, 3, 12, 11]:
+        res_txt = res_fnt_1.render(str(amount), True, BLACK)
+    elif amount in [4, 5, 10, 9]:
+        res_txt = res_fnt_2.render(str(amount), True, BLACK)
+    elif amount in [6, 7, 8]:
+        res_txt = res_fnt_3.render(str(amount), True, BLACK)
+    res_rct = res_txt.get_rect(center=center)
+    screen.blit(res_txt, res_rct)

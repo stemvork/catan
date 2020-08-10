@@ -3,6 +3,7 @@ import sys
 import random
 import math
 from itertools import tee
+from pygame import gfxdraw as gd
 
 
 # Needed to initialise e.g. font module
@@ -14,6 +15,7 @@ SCREENDIM   = (400, 400)      # Test dimensions
 DEBUG       = True            # Development vs. production
 FPS         = 30              # Frames per second
 SIZE        = 400 // 9
+RESSIZE     = 3*SIZE//9
 INSET       = 2
 
 
@@ -51,6 +53,11 @@ else:
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.display.set_caption("Kolonisten v0.3")
 clock = pygame.time.Clock()
+
+# Setup some font
+res_fnt_1 = pygame.font.SysFont("Arial", RESSIZE//2, True)
+res_fnt_2 = pygame.font.SysFont("Arial", 2*RESSIZE//3, True)
+res_fnt_3 = pygame.font.SysFont("Arial", RESSIZE, True)
 
 
 # Needed for some systems to quit without errors

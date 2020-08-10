@@ -109,6 +109,10 @@ def base_structs(screen):
     draw_bar(screen, middle_of(screen, 15, 3), 3, colour=COLOURS["lightblue"])
     draw_bar(screen, middle_of(screen, 5, 5), 5, colour=COLOURS["orange"])
 
+    _res = [10, 2, 9, 12, 6, 4, 10, 9, 11, -1, 3, 8, 8, 3, 4, 5, 5, 6, 11]
+    for i, a in enumerate(_res):
+        draw_res(screen, get_tile_center(screen, i), a) if a > 0 else None
+
 def get_tile_center(screen, n):
     coord = ring_list()[n]
     return calculate_center(screen, coord)
