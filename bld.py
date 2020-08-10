@@ -69,7 +69,6 @@ def draw_bar(screen, center, i, size=SIZE, colour=WHITE):
     _pts = [rotate_point(p, 90 + 60*i) for p in _pts]
     draw_with_outline(screen, _pts, center, colour)
 
-
 def draw_church(screen, center, size=SIZE, colour=WHITE):
     # Some constants
     _s   = size // 7
@@ -93,3 +92,19 @@ def draw_church(screen, center, size=SIZE, colour=WHITE):
            ]
     _pts = [(p[0], p[1]+dy) for p in _pts]
     draw_with_outline(screen, _pts, center, colour)
+
+def draw_robber(screen, center, size=SIZE):
+    _s     = size // 2
+    cx, cy = center
+    rw     = round(_s * 5/8)
+    rh     = round(_s * 9/8)
+    rhw    = round(_s * 4/8)
+    rhh    = round(_s * 4/8)
+    rbh    = round(_s * 2/8)
+
+    pygame.draw.ellipse(screen, BLACK, (
+        cx - rw//2, cy - rh//2, rw, rh))
+    pygame.draw.ellipse(screen, BLACK, (
+        cx - rhw//2-1, cy - 3*rhh//7 - 3*rh//5, rhw + 1, rhh))
+    pygame.draw.rect(screen, BLACK, (
+        cx - rw//2, cy + 3*rh//7 - rbh//2, rw, rbh))

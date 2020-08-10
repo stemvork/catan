@@ -1,4 +1,3 @@
-from lib import *
 from game import * 
 
 
@@ -27,6 +26,7 @@ while True:
     screen.fill(COLOURS["sea"])
     base_map_color_test(screen)
     base_structs(screen)
+    draw_robber(screen, get_center())
 
 
     # Display the new frame and wait for next game loop
