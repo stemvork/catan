@@ -58,6 +58,7 @@ def color_test(screen, _cl=COLOURS):
     [draw_hex(screen, c, COLOURS[k]) for k, c in zip(COLOURS, _idx)]
 
 def base_map_color_test(screen):
+    [draw_hex(screen, c, COLOURS["sea"]) for c in ring_list(3)]
     _cl = [ "ore"
           , "wool"
           , "lumber"
