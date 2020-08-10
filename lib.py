@@ -12,10 +12,8 @@ pygame.init()
 
 # Some constants
 SCREENDIM   = (400, 400)      # Test dimensions
-DEBUG       = True            # Development vs. production
+DEBUG       = False            # Development vs. production
 FPS         = 30              # Frames per second
-SIZE        = 400 // 9
-RESSIZE     = 3*SIZE//9
 INSET       = 2
 
 
@@ -56,6 +54,10 @@ else:
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 pygame.display.set_caption("Kolonisten v0.3")
 clock = pygame.time.Clock()
+
+# Constants that depend on the screen size
+SIZE        = screen.get_rect().height // 11
+RESSIZE     = 3*SIZE//9
 
 # Setup some font
 res_fnt_1 = pygame.font.SysFont("Arial", RESSIZE//2, True)
