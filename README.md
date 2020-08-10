@@ -1,10 +1,16 @@
 # Catan
 Python (pygame) collaboration project, to implement a boardgame.
 
+## Task list v0.4
+- [ ] Implement feature #1
+
 ## Task list v0.3
 - [x] Add resource tokens and the robber. 
 - [x] Finish the new-player-friendly setup.
-- [ ] Work on basic game state and interaction.
+- [x] Work on basic game state and interaction.
+
+### Result
+![Screenshot of this version](/images/base-state.png)
 
 ## Task list v0.2
 - [x] Work on the Catan structures.
@@ -24,9 +30,6 @@ Python (pygame) collaboration project, to implement a boardgame.
 
 ### Result
 ![Screenshot of this version](/images/base-colors.png)
-
-## Task list v0.4
-- [ ] Implement feature #1
 
 ## Task list v0.5
 - [ ] Implement feature #2
