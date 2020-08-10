@@ -16,17 +16,19 @@ while True:
             if event.key == pygame.K_ESCAPE:
                 proper_exit()
             elif event.key == pygame.K_SPACE:
-                if current < 18:
-                    current += 1
-                else:
-                    current = 0
+                STATE["turn"] += 1
+            elif event.key == pygame.K_n:
+                STATE.update(initial_state())
 
 
     # Draw something to the screen buffer
-    screen.fill(COLOURS["sea"])
+    screen.fill(COLOURS["bg"])
     base_map_color_test(screen)
     base_structs(screen)
     draw_robber(screen, get_center())
+
+    draw_playing(screen)
+    draw_turn(screen)
 
 
     # Display the new frame and wait for next game loop

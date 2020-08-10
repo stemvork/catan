@@ -26,14 +26,17 @@ BG          = (20, 40, 80)
 
 
 # Colour definitions, list of HEX values 
-COLOURS  =  { "red": "#ff0000"
+COLOURS  =  { "white": "#ffffff"
+            , "black": "#000000"
+            , "bg" : "#666666"
+            , "red": "#ff0000"
             , "green": "#00ff00"
-            , "blue": "#0000ff"
+            #, "blue": "#0000ff"
             , "yellow": "#ffff00"
             , "magenta": "#ff00ff"
             , "cyan": "#00ffff"
             , "orange": "#ff9900"
-            , "lightblue": "#0099FF"
+            , "blue": "#0099FF"
             , "sea": "#2d84c9"
             , "desert": "#AF944D"
             , "brick": "#904D14"

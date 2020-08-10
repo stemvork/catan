@@ -1,5 +1,6 @@
 from lib import *
 from bld import *
+from state import *
 
 
 # Base functions
@@ -41,6 +42,7 @@ def draw_hex(screen, center, color=WHITE, size=SIZE,
     # Actually draw the hexes to the screen
     _pts = [hex_corner(center, i, size - INSET) for i in range(6)]
     pygame.draw.polygon(screen, color, _pts)
+    gd.aapolygon(screen, _pts, BLACK)
 
 def draw_big_hex(screen, n=2, size=SIZE):
     hexes = ring_list(n)
@@ -91,22 +93,22 @@ def structs_test(screen):
 def base_structs(screen):
     draw_house(screen, corner_of(screen, 8, 5))
     draw_house(screen, corner_of(screen, 8, 3), colour=COLOURS["red"])
-    draw_house(screen, corner_of(screen, 12, 1), colour=COLOURS["lightblue"])
+    draw_house(screen, corner_of(screen, 12, 1), colour=COLOURS["blue"])
     draw_house(screen, corner_of(screen, 13, 1), colour=COLOURS["orange"])
 
     draw_bar(screen, middle_of(screen, 8, 4), 4)
     draw_bar(screen, middle_of(screen, 8, 2), 2, colour=COLOURS["red"])
-    draw_bar(screen, middle_of(screen, 16, 5), 5, colour=COLOURS["lightblue"])
+    draw_bar(screen, middle_of(screen, 16, 5), 5, colour=COLOURS["blue"])
     draw_bar(screen, middle_of(screen, 17, 5), 5, colour=COLOURS["orange"])
 
     draw_house(screen, corner_of(screen, 10, 1))
     draw_house(screen, corner_of(screen, 0, 1), colour=COLOURS["red"])
-    draw_house(screen, corner_of(screen, 14, 1), colour=COLOURS["lightblue"])
+    draw_house(screen, corner_of(screen, 14, 1), colour=COLOURS["blue"])
     draw_house(screen, corner_of(screen, 5, 0), colour=COLOURS["orange"])
 
     draw_bar(screen, middle_of(screen, 10, 0), 0)
     draw_bar(screen, middle_of(screen, 1, 2), 2, colour=COLOURS["red"])
-    draw_bar(screen, middle_of(screen, 15, 3), 3, colour=COLOURS["lightblue"])
+    draw_bar(screen, middle_of(screen, 15, 3), 3, colour=COLOURS["blue"])
     draw_bar(screen, middle_of(screen, 5, 5), 5, colour=COLOURS["orange"])
 
     _res = [10, 2, 9, 12, 6, 4, 10, 9, 11, -1, 3, 8, 8, 3, 4, 5, 5, 6, 11]

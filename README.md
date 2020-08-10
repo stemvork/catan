@@ -2,8 +2,8 @@
 Python (pygame) collaboration project, to implement a boardgame.
 
 ## Task list v0.3
-- [ ] Add resource tokens and the robber. 
-- [ ] Finish the new-player-friendly setup.
+- [x] Add resource tokens and the robber. 
+- [x] Finish the new-player-friendly setup.
 - [ ] Work on basic game state and interaction.
 
 ## Task list v0.2
