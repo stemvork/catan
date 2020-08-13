@@ -1,50 +1,36 @@
-import random
-
-kleuren = ["♠", "♥", "♦", "♣"]
-aantallen = ["A", 10, "K", "Q", "J", 9, 8, 7]
-deck = [(k, a) for k in kleuren for a in aantallen]
-random.shuffle(deck)
-
-spelers = [[deck.pop() for i in range(8)] for i in range(4)]
-# A B A' B'
-# A: 0 2 
-# B: 1 3 
-
-troefkleur = random.choice(kleuren)
-rid = 0 # ronde id
-sid = 0 # slag id
-
-gewonnenA = []
-gewonnenB = []
-
-def trek_willekeurig(lijst):
-    _id = random.randrange(8)
-    return lijst.pop(_id)
-
-def trek_kleur(lijst, kaart):
-    for i, _kaart in enumerate(lijst):
-        _kleur = _kaart[0]
-        if _kleur is kaart[0]:
-            return lijst.pop(i)
-    return trek_willekeurig(lijst)
+from game import * 
 
 
-# een slag spelen
-slagkaarten = []
-slagkaarten.append(trek_willekeurig(spelers[0]))
-slagkaarten.append(trek_kleur(spelers[1], slagkaarten[0]))
-slagkaarten.append(trek_kleur(spelers[2], slagkaarten[0]))
-slagkaarten.append(trek_kleur(spelers[3], slagkaarten[0]))
+current = 0
 
-[print("aantal speler", i, "is", len(speler)) for i, speler in
-enumerate(spelers)]
 
-print("slagkaarten", slagkaarten)
+# Game loop
+while True:
 
-# TODO: puntentelling na slag
-# TODO: handiger weergeven (gesorteerd) kaarten
-# TODO: meerdere slagen
-# TODO: meerdere rondes
-# TODO: GROOT pygame en weergave
 
-# [print("speler", i, "\n", speler) for i, speler in enumerate(spelers)]
+    # Handle input from user
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            proper_exit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                proper_exit()
+            elif event.key == pygame.K_SPACE:
+                STATE["turn"] += 1
+            elif event.key == pygame.K_n:
+                STATE.update(initial_state())
+
+
+    # Draw something to the screen buffer
+    screen.fill(COLOURS["bg"])
+    base_map_color_test(screen)
+    base_structs(screen)
+    draw_robber(screen, get_center())
+
+    draw_playing(screen)
+    draw_turn(screen)
+
+
+    # Display the new frame and wait for next game loop
+    pygame.display.flip()
+    clock.tick(FPS)
