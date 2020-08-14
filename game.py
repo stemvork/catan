@@ -21,7 +21,6 @@ def update(game):
     for event in pygame.event.get():
         handle_quit(event)
         switch_state(event)
-        next_troef(game, event)
         speel_slagkaarten(game, event)
         next_score(game, event)
 
@@ -173,10 +172,8 @@ def switch_state(event):
             game.states.append(game.states.pop(0))
             game.state = game.states[0]
 
-def next_troef(game, event):
-    if event.type == pygame.KEYDOWN:
-        if event.key is pygame.K_SPACE:
-            game.troefkleur = random.choice(kleuren)
+def next_troef(game):
+    game.troefkleur = random.choice(kleuren)
 
 def speel_slagkaarten(game, event):
     if event.type == pygame.KEYDOWN:
@@ -190,4 +187,5 @@ def next_score(game, event):
            game.scoreA += _scoreA
            game.scoreB += _scoreB
            game.slagkaarten = [None] * 4
+           next_troef(game)
 
