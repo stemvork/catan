@@ -1,6 +1,7 @@
 import wasabi2d as w
-import random
 from pprint import pprint
+from die import *
+from fields import *
 
 def dumpobj(args):
     pprint(vars(args))
@@ -13,163 +14,9 @@ b = s.layers[0]
 t = s.layers[1]
 
 state = 'roll'
-
-class Die:
-    def __init__(self, color):
-        self.color = color
-        self.roll()
-
-    def roll(self):
-        self.value = random.randint(1, 6)
-        print("Rolled a", self.color, self.value)
-
-    def newset():
-        return [Die(color)
-            for color in
-            ["white", "yellow", "blue", "green", "orange", "purple"]]
-
-    def __str__(self):
-        return self.color + " " + str(self.value)
-
-    def __repr__(self):
-        return self.color + " " + str(self.value)
-
-class YellowFields():
-    color  = 'yellow'
-    fields = [None] * 12
-    reqs   = [3, 6, 5, 2, 1,
-              5, 1, 2, 4, 3,
-              4, 6]
-    # TODO: boni for yellow
-    boni   = [None] * 12
-    scores = reqs
-    def reset():
-        YellowFields.fields = [None] * 12
-        YellowFields.reqs   = [3, 6, 5, 2, 1,
-                               5, 1, 2, 4, 3,
-                               4, 6]
-        YellowFields.boni   = [None] * 12
-        YellowFields.scores = YellowFields.reqs
-
-    def playnext(die):
-        if die.color == 'green':
-            next_index = YellowFields.fields.index(None)
-            if next_index is not None:
-                if die.value >= YellowFields.reqs[next_index]:
-                    YellowFields.fields[next_index] = die
-                    return True
-                    # activate boni
-                    # update score
-class BlueFields():
-    color  = 'blue'
-    fields = [None] * 11
-    reqs   = list(range(2, 13))
-    # TODO: boni for blue
-    boni   = [None] * 11
-    scores = [1, 2, 4, 7, 11, 16, 22, 29, 37, 46, 56]
-    def reset():
-        BlueFields.fields = [None] * 11
-        BlueFields.reqs   = list(range(2, 13))
-        BlueFields.boni = [None] * 11
-        BlueFields.boni   = [None, None, None, "again", None,
-                              "xblue", "fuchs", None, "6purple", "reroll",
-                              None]
-        BlueFields.scores = [1, 2, 4, 7, 11, 16, 22, 29, 37, 46, 56]
-
-    def playnext(die):
-        if die.color == 'green':
-            next_index = BlueFields.fields.index(None)
-            if next_index is not None:
-                if die.value >= BlueFields.reqs[next_index]:
-                    BlueFields.fields[next_index] = die
-                    return True
-                    # activate boni
-                    # update score
-class GreenFields():
-    color  = 'green'
-    fields = [None] * 11
-    reqs   = list(range(1,6)) + list(range(1, 7))
-    boni   = [None, None, None, "again", None,
-              "xblue", "fuchs", None, "6purple", "reroll",
-              None]
-    scores = [1, 3, 6, 10, 15,
-                          21, 28, 36, 45, 55,
-                          66]
-    def reset():
-        GreenFields.fields = [None] * 11
-        GreenFields.reqs   = list(range(1,6)) + list(range(1, 7))
-        GreenFields.boni   = [None, None, None, "again", None,
-                              "xblue", "fuchs", None, "6purple", "reroll",
-                              None]
-        GreenFields.scores = [1, 3, 6, 10, 15,
-                              21, 28, 36, 45, 55,
-                              66]
-
-    def playnext(die):
-        if die.color == 'green':
-            next_index = GreenFields.fields.index(None)
-            if next_index is not None:
-                if die.value >= GreenFields.reqs[next_index]:
-                    GreenFields.fields[next_index] = die
-                    return True
-                    # activate boni
-                    # update score
-class OrangeFields():
-    color  = 'orange'
-    fields = [None] * 11
-    reqs   = [None] * 11
-    boni   = [None, None, "reroll", "double", "xyellow",
-              "again", "double", "fuchs", "double", "6purple",
-              None]
-    scores = [None] * 11
-    def reset():
-        OrangeFields.fields = [None] * 11
-        OrangeFields.reqs   = [None] * 11
-        OrangeFields.boni   = [None, None, "reroll", "double", "xyellow",
-                               "again", "double", "fuchs", "double", "6purple",
-                               None]
-        OrangeFields.scores = [None] * 11
-
-    def playnext(die):
-        if die.color == 'green':
-            next_index = OrangeFields.fields.index(None)
-            if next_index is not None:
-                if die.value >= OrangeFields.reqs[next_index]:
-                    OrangeFields.fields[next_index] = die
-                    return True
-                    # activate boni
-                    # update score
-class PurpleFields():
-    color  = 'purple'
-    fields = [None] * 11
-    reqs   = [None] * 11
-    # TODO: implement reqs for purple
-    boni   = [None, None, "reroll", "xblue", "again",
-              "xyellow", "fuchs", "reroll", "xgreen", "6orange",
-              "again"]
-    scores = [None] * 11
-    def reset():
-        PurpleFields.fields = [None] * 11
-        PurpleFields.reqs   = [None] * 11
-        PurpleFields.boni   = [None, None, "reroll", "xblue", "again",
-                              "xyellow", "fuchs", "reroll", "xgreen", "6orange",
-                              "again"]
-        PurpleFields.scores = [None] * 11
-    def playnext(die):
-        if die.color == 'green':
-            next_index = PurpleFields.fields.index(None)
-            if next_index is not None:
-                if die.value >= PurpleFields.reqs[next_index]:
-                    PurpleFields.fields[next_index] = die
-                    return True
-                    # activate boni
-                    # update score
-
-fieldsobjs = [None, YellowFields, BlueFields, GreenFields, OrangeFields,
-              PurpleFields]
-
-dice = Die.newset()
-state = 'select'
+fieldsobjs = [None, YellowFields,
+              BlueFields, GreenFields,
+              OrangeFields, PurpleFields]
 
 def play(die, state, fieldsobj):
     if fieldsobj.color == die.color:
@@ -183,9 +30,8 @@ def play(die, state, fieldsobj):
                 state = 'roll'
     return die, state, fieldsobj
 
-def roll(dice, state):
-    dice = Die.newset()
-    return dice, 'select'
+def roll():
+    return Die.newset()
 
 @w.event
 def on_key_down(key):
@@ -193,7 +39,8 @@ def on_key_down(key):
 
     if state == 'roll':
         if key == w.keys.SPACE:
-            dice, state = roll(dice, state)
+            dice  = roll()
+            state = 'select'
 
     if state == 'select':
         if key in range(w.keys.K_2, w.keys.K_7): # not white
@@ -207,8 +54,9 @@ def on_key_down(key):
             fieldsobj = fieldsobjs[3]
             die, state, fieldsobj = play(die, state, fieldsobj)
 
-    print("Dice", dice)
+    print("Dice", dice) if dice else None
     print("FieldsObjs", [_.fields for _ in fieldsobjs if _ is not None])
     print("State", state)
     print()
+
 w.run()
