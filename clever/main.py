@@ -2,6 +2,8 @@ import wasabi2d as w
 def dumpobj(args):
     pprint(vars(args))
 
+def pdir(args):
+    print(dir(args))
 def adjust(sprites, scale):
     if isinstance(sprites, list) or isinstance(sprites, set):
         for sprite in sprites:
@@ -9,9 +11,17 @@ def adjust(sprites, scale):
             x, y = sprite.pos
             x, y = scale*x, scale*y
             sprite.pos = x+scale*sprite.width/2, y+scale*sprite.height/2
+    elif isinstance(sprites, w.Group):
+        for sprite in sprites._objects:
+            sprite.scale = scale
+            x, y = sprite.pos
+            x, y = scale*x, scale*y
+            sprite.pos = x+scale*sprite.width/2, y+scale*sprite.height/2
     else:
         sprites.scale = scale
-        sprites.pos = scale*sprites.width/2, scale*sprites.height/2
+        x, y = sprites.pos
+        x, y = scale*x, scale*y
+        sprites.pos = x+scale*sprites.width/2, y+scale*sprites.height/2
 
 from pprint import pprint
 from die import *
@@ -20,6 +30,7 @@ from fields import *
 roll = Dieset
 
 # TODO: Develop yellow fields
+# TODO: Clicking regions
 
 HEIGHT = 700
 SCALE = HEIGHT/1134
@@ -32,16 +43,25 @@ bg = s.layers[0]
 paper = bg.add_sprite('paper', scale=SCALE, pos = (798*SCALE/2, s.height/2))
 
 b  = s.layers[1]
-dicerect    = b.add_rect(width=135, height=383, color='#ff000099')
-roundrect   = b.add_rect(width=663, height=135, color='#00ff0099', pos=(135, 0))
-rerollrect  = b.add_rect(width=663, height=123, color='#0000ff99', pos=(135, 135))
-againrect   = b.add_rect(width=663, height=125, color='#ffff0099', pos=(135, 258))
-yellowrect  = b.add_rect(width=400, height=372, color='#ff00ff99', pos=(0, 383))
-bluerect    = b.add_rect(width=398, height=372, color='#00ffff99', pos=(400, 383))
-greenrect   = b.add_rect(width=798, height=140, color='#ff660099', pos=(0, 755))
-orangerect  = b.add_rect(width=798, height=115, color='#00ff6699', pos=(0, 895))
-purplerect  = b.add_rect(width=798, height=124, color='#6600ff99', pos=(0, 1010))
-adjust(b.objects, SCALE)
+bounds = w.Group([b.add_rect(width=135, height=383, color='#ff000099'),
+b.add_rect(width=663, height=135, color='#00ff0099', pos=(135, 0)),
+b.add_rect(width=663, height=123, color='#0000ff99', pos=(135, 135)),
+b.add_rect(width=663, height=125, color='#ffff0099', pos=(135, 258)),
+b.add_rect(width=400, height=372, color='#ff00ff99', pos=(0, 383)),
+b.add_rect(width=398, height=372, color='#00ffff99', pos=(400, 383)),
+b.add_rect(width=798, height=140, color='#ff660099', pos=(0, 755)),
+b.add_rect(width=798, height=115, color='#00ff6699', pos=(0, 895)),
+b.add_rect(width=798, height=124, color='#6600ff99', pos=(0, 1010)),])
+# dicerect    = b.add_rect(width=135, height=383, color='#ff000099')
+# roundrect   = b.add_rect(width=663, height=135, color='#00ff0099', pos=(135, 0))
+# rerollrect  = b.add_rect(width=663, height=123, color='#0000ff99', pos=(135, 135))
+# againrect   = b.add_rect(width=663, height=125, color='#ffff0099', pos=(135, 258))
+# yellowrect  = b.add_rect(width=400, height=372, color='#ff00ff99', pos=(0, 383))
+# bluerect    = b.add_rect(width=398, height=372, color='#00ffff99', pos=(400, 383))
+# greenrect   = b.add_rect(width=798, height=140, color='#ff660099', pos=(0, 755))
+# orangerect  = b.add_rect(width=798, height=115, color='#00ff6699', pos=(0, 895))
+# purplerect  = b.add_rect(width=798, height=124, color='#6600ff99', pos=(0, 1010))
+adjust(bounds, SCALE)
 
 t  = s.layers[2]
 
@@ -82,5 +102,10 @@ def on_key_down(key):
     print("FieldsObjs", [_.fields for _ in fieldsobjs if _ is not None])
     print("State", state)
     print()
+@w.event
+def on_mouse_down(pos):
+    for i, rect in enumerate(bounds):
+        if rect.bounds.collidepoint(pos):
+            print(f"Mouse clicked {i}")
 
 w.run()
