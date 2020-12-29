@@ -30,7 +30,6 @@ from fields import *
 roll = Dieset
 
 # TODO: Develop yellow fields
-# TODO: Clicking regions
 
 HEIGHT = 700
 SCALE = HEIGHT/1134
