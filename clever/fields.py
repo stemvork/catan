@@ -58,6 +58,13 @@ class Yellow(Fields):
 yellow = Yellow()
 yellow.play(Die("yellow"))
 print(yellow)
+fields = {"yellow": yellow,
+         #  "blue": blue,
+         #  "green": green,
+         #  "orange": orange,
+         #  "purple": purple,
+         }
+# fields = [yellow, blue, green, orange, purple]
 
 class YellowFields():
     color  = 'yellow'
