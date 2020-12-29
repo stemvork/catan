@@ -30,6 +30,8 @@ from fields import *
 roll = Dieset
 
 # TODO: Develop yellow fields
+# TODO: Implement mouse FROM->TO behaviour
+# TODO: Create rects for (smaller) fields within bounds
 
 HEIGHT = 700
 SCALE = HEIGHT/1134
@@ -124,6 +126,7 @@ def on_mouse_down(pos):
                     print("Clicked white!", die)
                 if die.color == "yellow":
                     print("Clicked yellow!", die)
+                    fields[die.color].play(die)
                 if die.color == "blue":
                     print("Clicked blue!", die)
                 if die.color == "green":
