@@ -1,3 +1,64 @@
+from die import *
+
+class Fields():
+    def __init__(self, n=11):
+        self.fields = [None] * n
+        self.reqs   = [None] * n
+        self.boni   = [None] * n
+        self.scores = [None] * n
+
+    def legal(self, dice):
+        return True
+
+    def play(self, dice):
+        return False
+
+    def bonus(self):
+        return None
+
+    def score(self):
+        return "Total Score"
+
+    def __str__(self):
+        return str([(fieldidx, fieldvalue)
+            for fieldidx, fieldvalue in enumerate(self.fields)
+            if fieldvalue is not None])
+
+    def __repr__(self):
+        self.__str__()
+
+class Yellow(Fields):
+    def __init__(self):
+        super().__init__(12)
+        self.reqs = [3, 6, 5, 2, 1,
+                     5, 1, 2, 4, 3,
+                     4, 6]
+
+    def ids(self, die):
+        return [i for i, v in enumerate(self.reqs)
+               if v == die.value]
+
+    def legal(self, die):
+        print('checking: legal to play yellow')
+        return len(self.ids(die)) > 0
+
+    def play(self, die):
+        if self.legal(die):
+            print('playing die', die)
+            return True
+        else:
+            return False
+
+    def bonus(self):
+        super().bonus()
+
+    def score(self):
+        super().score()
+
+yellow = Yellow()
+yellow.play(Die("yellow"))
+print(yellow)
+
 class YellowFields():
     color  = 'yellow'
     fields = [None] * 12
@@ -144,3 +205,8 @@ class PurpleFields():
                     return True
                     # activate boni
                     # update score
+
+fieldsobjs = [None, YellowFields,
+              BlueFields, GreenFields,
+              OrangeFields, PurpleFields]
+
