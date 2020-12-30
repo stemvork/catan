@@ -23,14 +23,24 @@ def adjust(sprites, scale):
         x, y = scale*x, scale*y
         sprites.pos = x+scale*sprites.width/2, y+scale*sprites.height/2
 
+def region(pos):
+    if rpaper.bounds.collidepoint(pos):
+        for i, rect in enumerate(bounds):
+            if rect.bounds.collidepoint(pos):
+                return (0, i)
+    else:
+        for i, die in enumerate(dice_rects):
+            if die.bounds.collidepoint(pos):
+                return (1, i)
+
 from pprint import pprint
 from die import *
 from fields import *
 
 roll = Dieset
+mouseclick = None
 
 # TODO: Develop yellow fields
-# TODO: Implement mouse FROM->TO behaviour
 
 HEIGHT = 700
 SCALE = HEIGHT/1134
@@ -41,6 +51,7 @@ s.background = 0.1, 0.1, 0.1
 
 bg = s.layers[0]
 paper = bg.add_sprite('paper', scale=SCALE, pos = (798*SCALE/2, s.height/2))
+rpaper = s.layers[-1].add_rect(width=paper.width*SCALE, height=paper.height*SCALE, pos=paper.pos)
 
 RECTTRANS = '00'
 b  = s.layers[1]
@@ -147,22 +158,46 @@ def on_key_down(key):
 #     print()
 @w.event
 def on_mouse_down(pos):
-    for i, rect in enumerate(dice_rects):
-        if rect.bounds.collidepoint(pos):
-            die = dice.select(i)
-            if die:
-                if die.color == "white":
-                    print("Clicked white!", die)
-                if die.color == "yellow":
-                    print("Clicked yellow!", die)
-                    fields[die.color].play(die)
-                if die.color == "blue":
-                    print("Clicked blue!", die)
-                if die.color == "green":
-                    print("Clicked green!", die)
-                if die.color == "orange":
-                    print("Clicked orange!", die)
-                if die.color == "purple":
-                    print("Clicked purple!", die)
+    global mouseclick
+
+    if mouseclick is None:
+        # print("First click", pos)
+        mouseclick = pos
+    elif isinstance(mouseclick, tuple):
+        # print("Second (or third?) click", mouseclick, pos)
+        if isinstance(mouseclick[0], int):
+            mouseclick = (mouseclick, pos)
+            _from, _to = mouseclick
+            __from, __to = region(_from), region(_to)
+            if __from is not None and __to is not None:
+                a, b, c, d = *__from, *__to
+                if a == 1 and c != 1:
+                    if b > 0:
+                        if d-b == 3:
+                            print(f"Clicked from {__from}{_from} to {__to}{_to}")
+                        else:
+                            print("Canceled click.")
+                    else:
+                        print("Playing white die!")
+                else:
+                    print("Canceled click.")
+            mouseclick = None
+#         for i, rect in enumerate(dice_rects):
+#             if rect.bounds.collidepoint(pos):
+#                 die = dice.select(i)
+#                 if die:
+#                     if die.color == "white":
+#                         print("Clicked white!", die)
+#                     if die.color == "yellow":
+#                         print("Clicked yellow!", die)
+#                         fields[die.color].play(die)
+#                     if die.color == "blue":
+#                         print("Clicked blue!", die)
+#                     if die.color == "green":
+#                         print("Clicked green!", die)
+#                     if die.color == "orange":
+#                         print("Clicked orange!", die)
+#                     if die.color == "purple":
+#                         print("Clicked purple!", die)
 
 w.run()
