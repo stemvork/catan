@@ -1,4 +1,5 @@
 import sys
+from itertools import chain
 import wasabi2d as w
 def dumpobj(args):
     pprint(vars(args))
@@ -24,11 +25,14 @@ roll = Dieset
 mouseclick = None
 
 # TODO: Develop yellow fields
-# TODO: Indicate actual die value
 
 from scene import *
 
 dice = roll()
+# position for dice_field
+# dice_sprites = w.Group([die.render(d, (47, 47)) for die in dice.dice])
+dice_sprites = w.Group(chain.from_iterable([die.render(d, (835, 43+135*j)) for j, die in enumerate(dice.dice)]))
+adjust(dice_sprites, SCALE)
 state = 'select'
 
 @w.event

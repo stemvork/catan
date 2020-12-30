@@ -2,17 +2,32 @@ import wasabi2d as w
 def adjust(sprites, scale):
     if isinstance(sprites, list) or isinstance(sprites, set):
         for sprite in sprites:
+            try:
+                sprite.width = sprite.radius
+                sprite.height = sprite.radius
+            except:
+                pass
             sprite.scale = scale
             x, y = sprite.pos
             x, y = scale*x, scale*y
             sprite.pos = x+scale*sprite.width/2, y+scale*sprite.height/2
     elif isinstance(sprites, w.Group):
         for sprite in sprites._objects:
+            try:
+                sprite.width = sprite.radius
+                sprite.height = sprite.radius
+            except:
+                pass
             sprite.scale = scale
             x, y = sprite.pos
             x, y = scale*x, scale*y
             sprite.pos = x+scale*sprite.width/2, y+scale*sprite.height/2
     else:
+        try:
+            sprite.width = sprite.radius
+            sprite.height = sprite.radius
+        except:
+            pass
         sprites.scale = scale
         x, y = sprites.pos
         x, y = scale*x, scale*y
@@ -54,13 +69,14 @@ b.add_rect(width=798, height=124, color='#6600ff'+RECTTRANS, pos=(0, 1010)),])
 adjust(bounds, SCALE)
 d  = s.layers[2]
 
+DICETRANS = '22'
 dice_rects = w.Group([
-d.add_rect(width=135, height=135, color='white', pos=(798, 0)),
-d.add_rect(width=135, height=135, color='yellow', pos=(798, 135)),
-d.add_rect(width=135, height=135, color='blue', pos=(798, 270)),
-d.add_rect(width=135, height=135, color='green', pos=(798, 405)),
-d.add_rect(width=135, height=135, color='orange', pos=(798, 540)),
-d.add_rect(width=135, height=135, color='purple', pos=(798, 675)),])
+d.add_rect(width=135, height=135, color='#ffffff'+DICETRANS, pos=(798, 0)),
+d.add_rect(width=135, height=135, color='#ffff00'+DICETRANS, pos=(798, 135)),
+d.add_rect(width=135, height=135, color='#0000ff'+DICETRANS, pos=(798, 270)),
+d.add_rect(width=135, height=135, color='#009900'+DICETRANS, pos=(798, 405)),
+d.add_rect(width=135, height=135, color='#ff6600'+DICETRANS, pos=(798, 540)),
+d.add_rect(width=135, height=135, color='#6600ff'+DICETRANS, pos=(798, 675)),])
 adjust(dice_rects, SCALE)
 
 f = s.layers[3]
