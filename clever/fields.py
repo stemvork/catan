@@ -10,7 +10,7 @@ class Fields():
     def legal(self, dice):
         return True
 
-    def play(self, dice):
+    def play(self, dice, pos):
         return False
 
     def bonus(self):
@@ -38,22 +38,28 @@ class Yellow(Fields):
         return [i for i, v in enumerate(self.reqs)
                if v == die.value]
 
-    def legal(self, die):
-        print('checking: legal to play yellow')
-        return len(self.ids(die)) > 0
+    def legal(self, die, pos):
+        idx = [_.bounds.collidepoint(pos) 
+                for _ in self.rects].index(True)
+        legal = self.fields[idx] is None and self.reqs[idx] == die.value
+        print(f"{die} played to {pos} is {legal}")
+        return idx, legal
 
-    def play(self, die):
-        if self.legal(die):
-            print('playing die', die)
-            return True
+    def play(self, die, pos):
+        idx, legal = self.legal(die, pos)
+        if legal:
+            self.fields[idx] = die.value
+            self.reqs[idx]   = None
+            return idx, True
         else:
-            return False
+            return idx, False
 
     def bonus(self):
         super().bonus()
 
     def score(self):
         super().score()
+
 class Blue(Fields):
     def __init__(self):
         super().__init__()
@@ -66,7 +72,7 @@ class Blue(Fields):
         print('checking: legal to play blue')
         return len(self.ids(die)) > 0
 
-    def play(self, die):
+    def play(self, die, pos):
         if self.legal(die):
             print('playing die', die)
             return True
@@ -78,6 +84,7 @@ class Blue(Fields):
 
     def score(self):
         super().score()
+
 class Green(Fields):
     def __init__(self):
         super().__init__()
@@ -90,7 +97,7 @@ class Green(Fields):
         print('checking: legal to play green')
         return len(self.ids(die)) > 0
 
-    def play(self, die):
+    def play(self, die, pos):
         if self.legal(die):
             print('playing die', die)
             return True
@@ -102,6 +109,7 @@ class Green(Fields):
 
     def score(self):
         super().score()
+
 class Orange(Fields):
     def __init__(self):
         super().__init__()
@@ -114,7 +122,7 @@ class Orange(Fields):
         print('checking: legal to play orange')
         return len(self.ids(die)) > 0
 
-    def play(self, die):
+    def play(self, die, pos):
         if self.legal(die):
             print('playing die', die)
             return True
@@ -126,6 +134,7 @@ class Orange(Fields):
 
     def score(self):
         super().score()
+
 class Purple(Fields):
     def __init__(self):
         super().__init__()
@@ -138,7 +147,7 @@ class Purple(Fields):
         print('checking: legal to play purple')
         return len(self.ids(die)) > 0
 
-    def play(self, die):
+    def play(self, die, pos):
         if self.legal(die):
             print('playing die', die)
             return True

@@ -1,4 +1,6 @@
 import wasabi2d as w
+from fields import *
+
 def adjust(sprites, scale):
     if isinstance(sprites, list) or isinstance(sprites, set):
         for sprite in sprites:
@@ -90,6 +92,7 @@ yellow_rects_mask = [(0,0), (1,0), (2,0),
 yellow_rects = w.Group([
     f.add_rect(width=53, height=53, color='#ffff0099', pos=(43+68.5*i, 407+65*j))
     for i, j in yellow_rects_mask])
+yellow.rects = yellow_rects
 
 blue_rects_mask = [(1,0), (2,0), (3,0),
                    (0,1), (1,1), (2,1), (3,1),
