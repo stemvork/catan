@@ -1,3 +1,4 @@
+from itertools import chain
 import random
 
 COLOURS = ["white", "yellow", "blue", "green", "orange", "purple"]
@@ -24,6 +25,11 @@ class Dieset:
 
     def roll(self):
         self.dice = [Die(color) for color in COLOURS]
+
+    def render(self, layer):
+        return chain.from_iterable([
+            die.render(layer, (835, 43+135*j))
+            for j, die in enumerate(self.dice)])
 
 class Die:
     def __init__(self, color):

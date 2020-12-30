@@ -67,19 +67,22 @@ b.add_rect(width=798, height=124, color='#6600ff'+RECTTRANS, pos=(0, 1010)),])
 # orangerect  = b.add_rect(width=798, height=115, color='#00ff6699', pos=(0, 895))
 # purplerect  = b.add_rect(width=798, height=124, color='#6600ff99', pos=(0, 1010))
 adjust(bounds, SCALE)
-d  = s.layers[2]
+
+dr  = s.layers[2]
 
 DICETRANS = '22'
 dice_rects = w.Group([
-d.add_rect(width=135, height=135, color='#ffffff'+DICETRANS, pos=(798, 0)),
-d.add_rect(width=135, height=135, color='#ffff00'+DICETRANS, pos=(798, 135)),
-d.add_rect(width=135, height=135, color='#0000ff'+DICETRANS, pos=(798, 270)),
-d.add_rect(width=135, height=135, color='#009900'+DICETRANS, pos=(798, 405)),
-d.add_rect(width=135, height=135, color='#ff6600'+DICETRANS, pos=(798, 540)),
-d.add_rect(width=135, height=135, color='#6600ff'+DICETRANS, pos=(798, 675)),])
+dr.add_rect(width=135, height=135, color='#ffffff'+DICETRANS, pos=(798, 0)),
+dr.add_rect(width=135, height=135, color='#ffff00'+DICETRANS, pos=(798, 135)),
+dr.add_rect(width=135, height=135, color='#0000ff'+DICETRANS, pos=(798, 270)),
+dr.add_rect(width=135, height=135, color='#009900'+DICETRANS, pos=(798, 405)),
+dr.add_rect(width=135, height=135, color='#ff6600'+DICETRANS, pos=(798, 540)),
+dr.add_rect(width=135, height=135, color='#6600ff'+DICETRANS, pos=(798, 675)),])
 adjust(dice_rects, SCALE)
 
-f = s.layers[3]
+d = s.layers[3]
+
+f = s.layers[4]
 yellow_rects_mask = [(0,0), (1,0), (2,0),
                      (0,1), (1,1), (3,1),
                      (0,2), (2,2), (3,2),
@@ -108,4 +111,4 @@ purple_rects = w.Group([
     for i in range(11)])
 [adjust(g, SCALE) for g in f.objects]
 
-t  = s.layers[4]
+t  = s.layers[5]

@@ -1,6 +1,17 @@
-import sys
-from itertools import chain
+# DEPENDENCIES and MODULES
+from pprint import pprint
 import wasabi2d as w
+import sys
+
+from die import *
+from fields import *
+from scene import *
+
+# AUX FUNCTIONS
+def clear_layer(layer):
+    for obj in reversed(list(layer.objects)):
+        obj.delete()
+
 def dumpobj(args):
     pprint(vars(args))
 
@@ -17,28 +28,24 @@ def region(pos):
             if die.bounds.collidepoint(pos):
                 return (1, i)
 
-from pprint import pprint
-from die import *
-from fields import *
+# TODO: Develop yellow fields
 
 roll = Dieset
 mouseclick = None
 
-# TODO: Develop yellow fields
-
-from scene import *
-
 dice = roll()
-# position for dice_field
-# dice_sprites = w.Group([die.render(d, (47, 47)) for die in dice.dice])
-dice_sprites = w.Group(chain.from_iterable([die.render(d, (835, 43+135*j)) for j, die in enumerate(dice.dice)]))
+dice_sprites = w.Group(dice.render(d))
 adjust(dice_sprites, SCALE)
+
 state = 'select'
 
 @w.event
 def on_key_down(key):
     if key == w.keys.SPACE:
+        clear_layer(d)
         dice.roll()
+        dice_sprites = w.Group(dice.render(d))
+        adjust(dice_sprites, SCALE)
     if key == w.keys.Q:
         sys.exit()
 
