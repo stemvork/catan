@@ -1,5 +1,7 @@
 import random
 
+COLOURS = ["white", "yellow", "blue", "green", "orange", "purple"]
+
 class Dieset:
     def __init__(self, colors=[]):
         if len(colors) == 0:
@@ -20,8 +22,7 @@ class Dieset:
         return None
 
     def roll(self):
-        self.dice = [Die(color) for color in
-               ["white", "yellow", "blue", "green", "orange", "purple"]]
+        self.dice = [Die(color) for color in COLOURS]
 
 class Die:
     def __init__(self, color):
