@@ -4,6 +4,7 @@ def dumpobj(args):
 
 def pdir(args):
     print(dir(args))
+
 def adjust(sprites, scale):
     if isinstance(sprites, list) or isinstance(sprites, set):
         for sprite in sprites:
@@ -41,6 +42,7 @@ roll = Dieset
 mouseclick = None
 
 # TODO: Develop yellow fields
+# TODO: Indicate actual die value
 
 HEIGHT = 700
 SCALE = HEIGHT/1134
@@ -158,13 +160,11 @@ def on_key_down(key):
 #     print()
 @w.event
 def on_mouse_down(pos):
-    global mouseclick
+    global mouseclick, dice
 
     if mouseclick is None:
-        # print("First click", pos)
         mouseclick = pos
     elif isinstance(mouseclick, tuple):
-        # print("Second (or third?) click", mouseclick, pos)
         if isinstance(mouseclick[0], int):
             mouseclick = (mouseclick, pos)
             _from, _to = mouseclick
@@ -174,13 +174,12 @@ def on_mouse_down(pos):
                 if a == 1 and c != 1:
                     if b > 0:
                         if d-b == 3:
+                            die = dice.select(b)
+                            fields[die.color].play(die)
                             print(f"Clicked from {__from}{_from} to {__to}{_to}")
-                        else:
-                            print("Canceled click.")
+                            print(f"Selected die {die}")
                     else:
                         print("Playing white die!")
-                else:
-                    print("Canceled click.")
             mouseclick = None
 #         for i, rect in enumerate(dice_rects):
 #             if rect.bounds.collidepoint(pos):

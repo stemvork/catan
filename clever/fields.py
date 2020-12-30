@@ -54,15 +54,113 @@ class Yellow(Fields):
 
     def score(self):
         super().score()
+class Blue(Fields):
+    def __init__(self):
+        super().__init__()
+
+    def ids(self, die):
+        return [i for i, v in enumerate(self.reqs)
+               if v == die.value]
+
+    def legal(self, die):
+        print('checking: legal to play blue')
+        return len(self.ids(die)) > 0
+
+    def play(self, die):
+        if self.legal(die):
+            print('playing die', die)
+            return True
+        else:
+            return False
+
+    def bonus(self):
+        super().bonus()
+
+    def score(self):
+        super().score()
+class Green(Fields):
+    def __init__(self):
+        super().__init__()
+
+    def ids(self, die):
+        return [i for i, v in enumerate(self.reqs)
+               if v == die.value]
+
+    def legal(self, die):
+        print('checking: legal to play green')
+        return len(self.ids(die)) > 0
+
+    def play(self, die):
+        if self.legal(die):
+            print('playing die', die)
+            return True
+        else:
+            return False
+
+    def bonus(self):
+        super().bonus()
+
+    def score(self):
+        super().score()
+class Orange(Fields):
+    def __init__(self):
+        super().__init__()
+
+    def ids(self, die):
+        return [i for i, v in enumerate(self.reqs)
+               if v == die.value]
+
+    def legal(self, die):
+        print('checking: legal to play orange')
+        return len(self.ids(die)) > 0
+
+    def play(self, die):
+        if self.legal(die):
+            print('playing die', die)
+            return True
+        else:
+            return False
+
+    def bonus(self):
+        super().bonus()
+
+    def score(self):
+        super().score()
+class Purple(Fields):
+    def __init__(self):
+        super().__init__()
+
+    def ids(self, die):
+        return [i for i, v in enumerate(self.reqs)
+               if v == die.value]
+
+    def legal(self, die):
+        print('checking: legal to play purple')
+        return len(self.ids(die)) > 0
+
+    def play(self, die):
+        if self.legal(die):
+            print('playing die', die)
+            return True
+        else:
+            return False
+
+    def bonus(self):
+        super().bonus()
+
+    def score(self):
+        super().score()
 
 yellow = Yellow()
-yellow.play(Die("yellow"))
-print(yellow)
+blue = Blue()
+green = Green()
+orange = Orange()
+purple = Purple()
 fields = {"yellow": yellow,
-         #  "blue": blue,
-         #  "green": green,
-         #  "orange": orange,
-         #  "purple": purple,
+          "blue": blue,
+          "green": green,
+          "orange": orange,
+          "purple": purple,
          }
 # fields = [yellow, blue, green, orange, purple]
 
