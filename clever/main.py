@@ -70,14 +70,18 @@ def on_mouse_down(pos):
             if _from is not None and _to is not None:
                 fr, fc, tr, tc = *_from, *_to
                 if fr == 1 and tr != 1:
-                    if fc > 0:
+                    if fc in [1, 3, 4, 5]:
                         if tc - fc == 3:
                             die = dice.select(fc)
                             idx, success = fields[die.color].play(die, mouseclick[1])
                             if success:
                                 cross(die, idx)
-                    else:
+                    elif fc == 0:
                         # field obj: fields[COLOURS[tc-3]]
                         print("Playing white die!")
+                    elif fc == 2:
+                        die = dice.select(fc)
+                        idx, success = fields[die.color].play(
+                                dice, mouseclick[1])
             mouseclick = None
 w.run()
