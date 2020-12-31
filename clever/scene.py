@@ -63,6 +63,7 @@ blue_rects_mask = [(1,0), (2,0), (3,0),
 blue_rects = w.Group([
     f.add_rect(width=54, height=54, color='#0000ff99', pos=(430+69*i, 480+65*j))
     for i, j in blue_rects_mask])
+blue.rects = blue_rects
 
 green_rects = w.Group([
     f.add_rect(width=54, height=54, color='#00990099', pos=(102+60.28*i, 799))

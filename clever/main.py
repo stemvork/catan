@@ -27,12 +27,12 @@ def region(pos):
             if die.bounds.collidepoint(pos):
                 return (1, i)
 
-def cross(die, idx): # FIXME: won't work with white
-    _bounds = fields[die.color].rects[idx].bounds
+def cross(tc, idx): # FIXME: won't work with white
+    print(f"Crossing {tc}:{idx}")
+    _bounds = fields[tc].rects[idx].bounds
     t.add_rect(width=_bounds.width, height=_bounds.height, color='black',
             pos=(_bounds.x+_bounds.width/2, _bounds.y+_bounds.height/2))
 
-# TODO: Develop yellow fields
 # TODO: Move used die to silver plate
 
 roll = Dieset
@@ -43,6 +43,22 @@ dice_sprites = w.Group(dice.render(d))
 adjust(dice_sprites, SCALE)
 
 state = 'select'
+
+def call_play(mouseclick):
+    global dice
+
+    f, t = map(region, mouseclick) # map to large regions
+    fr, fc, tr, tc = *f, *t
+
+    if fr is not None and tr is not None: # cancel invalid clicks
+        dprint("Directed click.")
+        if fr == 1 and tr != 1: # from dice to paper
+            _tc = COLOURS[tc-3] # readable colour
+            idx, success = fields[_tc].play(dice, mouseclick, f, t)
+            if success:
+                cross(_tc, idx)
+    else:
+        dprint("Undirected click.")
 
 @w.event
 def on_key_down(key):
@@ -56,7 +72,7 @@ def on_key_down(key):
 
 @w.event
 def on_mouse_down(pos):
-    global mouseclick, dice
+    global mouseclick
 
     if mouseclick is None:
         mouseclick = pos # first click
@@ -64,20 +80,6 @@ def on_mouse_down(pos):
     elif isinstance(mouseclick, tuple):
         if isinstance(mouseclick[0], int):
             mouseclick = (mouseclick, pos) # two clicks
-            _from, _to = map(region, mouseclick)
-            if _from is not None and _to is not None:
-                fr, fc, tr, tc = *_from, *_to
-                if fr == 1 and tr != 1:
-                    if tc == 5: # blue
-                        idx, success = fields["blue"].play(dice, mouseclick[1])
-                    elif fc in [1, 3, 4, 5]:
-                        if tc - fc == 3:
-                            die = dice.select(fc)
-                            idx, success = fields[die.color].play(die, mouseclick[1])
-                            if success:
-                                cross(die, idx)
-                    elif fc == 0:
-                        # field obj: fields[COLOURS[tc-3]]
-                        print("Playing white die!")
+            call_play(mouseclick)
             mouseclick = None
 w.run()
