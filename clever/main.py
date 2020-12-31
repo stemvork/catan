@@ -4,7 +4,6 @@ import wasabi2d as w
 import sys
 
 from die import *
-# from fields import *
 from scene import *
 
 # AUX FUNCTIONS
@@ -28,14 +27,13 @@ def region(pos):
             if die.bounds.collidepoint(pos):
                 return (1, i)
 
-def cross(die, idx):
+def cross(die, idx): # FIXME: won't work with white
     _bounds = fields[die.color].rects[idx].bounds
     t.add_rect(width=_bounds.width, height=_bounds.height, color='black',
             pos=(_bounds.x+_bounds.width/2, _bounds.y+_bounds.height/2))
 
 # TODO: Develop yellow fields
 # TODO: Move used die to silver plate
-# TODO: Refactor
 
 roll = Dieset
 mouseclick = None
@@ -70,7 +68,9 @@ def on_mouse_down(pos):
             if _from is not None and _to is not None:
                 fr, fc, tr, tc = *_from, *_to
                 if fr == 1 and tr != 1:
-                    if fc in [1, 3, 4, 5]:
+                    if tc == 5: # blue
+                        idx, success = fields["blue"].play(dice, mouseclick[1])
+                    elif fc in [1, 3, 4, 5]:
                         if tc - fc == 3:
                             die = dice.select(fc)
                             idx, success = fields[die.color].play(die, mouseclick[1])
@@ -79,9 +79,5 @@ def on_mouse_down(pos):
                     elif fc == 0:
                         # field obj: fields[COLOURS[tc-3]]
                         print("Playing white die!")
-                    elif fc == 2:
-                        die = dice.select(fc)
-                        idx, success = fields[die.color].play(
-                                dice, mouseclick[1])
             mouseclick = None
 w.run()

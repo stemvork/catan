@@ -51,9 +51,9 @@ class Blue(Fields):
 
     def play(self, dice, pos):
         if self.legal(dice):
-            return True
+            return 0, True
         else:
-            return False
+            return 0, False
 
     def bonus(self):
         super().bonus()

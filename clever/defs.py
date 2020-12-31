@@ -1,7 +1,30 @@
 DEBUG = True
 
+HEIGHT = 700
+SCALE = HEIGHT/1134
+WIDTH = round((135+798)*SCALE)
+
+S_TITLE = "Ganz Schön Clever!"
+S_BACKGROUND = 0.1, 0.1, 0.1
+
+BG_IMG = 'paper'
+BG_W   = 798
+
+RECTTRANS = '00'
+DICETRANS = '11'
+
 COLOURS = ["white", "yellow", "blue", "green", "orange", "purple"]
 HCOLOURS = ['#ffffff', '#ffff00', '#0000ff', '#009900', '#ff6600', '#6600ff']
+
+BOUNDS = [(135, 383, '#ff0000', (0,0)),
+          (663, 135, '#00ff00', (135,0)),
+          (663, 123, '#0000ff', (135,135)),
+          (663, 125, '#ffff00', (135,258)),
+          (400, 372, '#ff00ff', (0, 383)),
+          (398, 372, '#00ffff', (400, 383)),
+          (798, 140, '#ff6600', (0, 755)),
+          (798, 115, '#00ff66', (0, 895)),
+          (798, 124, '#6600ff', (0, 1010)),]
 
 def dprint(*args):
     print(*args) if DEBUG else None
