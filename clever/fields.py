@@ -1,5 +1,4 @@
-from defs import *
-from die import *
+from die import * # depends on defs
 
 def legal_report(legal, die, pos):
     if legal:
@@ -82,14 +81,19 @@ class Blue(Fields):
 class Green(Fields):
     def __init__(self):
         super().__init__()
+        self.reqs = GREEN_REQS
 
     def ids(self, die):
         return [i for i, v in enumerate(self.reqs)
                if v == die.value]
 
-    def legal(self, die):
-        print('checking: legal to play green')
-        return len(self.ids(die)) > 0
+    def legal(self, die, pos):
+        # FIXME: Fails if not pressing on a subregion
+        idx = [_.bounds.collidepoint(pos) 
+                for _ in self.rects].index(True)
+        legal = self.fields[idx] is None and self.reqs[idx] <= die.value
+        legal_report(legal, die, pos)
+        return idx, legal
 
     def play(self, dice, mouseclick, f, t):
         fpos, tpos = mouseclick

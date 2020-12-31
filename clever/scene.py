@@ -1,6 +1,5 @@
 import wasabi2d as w
-from defs import *
-from fields import *
+from fields import * # depends on die and defs
 
 def adjust_sprite(sprite, scale):
     try:
@@ -68,14 +67,18 @@ blue.rects = blue_rects
 green_rects = w.Group([
     f.add_rect(width=54, height=54, color='#00990099', pos=(102+60.28*i, 799))
     for i in range(11)])
+green.rects = green_rects
 
 orange_rects = w.Group([
     f.add_rect(width=54, height=54, color='#ff660099', pos=(102+60.28*i, 913))
     for i in range(11)])
+orange.rects = orange_rects
 
 purple_rects = w.Group([
     f.add_rect(width=54, height=54, color='#6600ff99', pos=(102+60.28*i, 1027))
     for i in range(11)])
+purple.rects = purple_rects
+
 [adjust(g, SCALE) for g in f.objects]
 
 t  = s.layers[5]

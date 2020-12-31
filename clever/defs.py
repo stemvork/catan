@@ -66,3 +66,4 @@ YELLOW_REQS = [3, 6, 5, 2, 1,
                5, 1, 2, 4, 3,
                4, 6]
 BLUE_REQS   = list(range(2, 13))
+GREEN_REQS   = list(range(1, 6)) + list(range(1, 7))

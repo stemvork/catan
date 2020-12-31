@@ -3,8 +3,7 @@ from pprint import pprint
 import wasabi2d as w
 import sys
 
-from die import *
-from scene import *
+from scene import * # depends on fields, die and defs
 
 # AUX FUNCTIONS
 def clear_layer(layer):
@@ -33,6 +32,7 @@ def cross(tc, idx): # FIXME: won't work with white
     t.add_rect(width=_bounds.width, height=_bounds.height, color='black',
             pos=(_bounds.x+_bounds.width/2, _bounds.y+_bounds.height/2))
 
+# FIXME: Die can be used indefinitely after using once..
 # TODO: Move used die to silver plate
 
 roll = Dieset
