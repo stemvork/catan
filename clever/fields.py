@@ -12,11 +12,17 @@ def legal_report(legal, die, pos):
 
 
 def yellow_legal(self, die, pos):
-    idx = [_.bounds.collidepoint(pos) 
-            for _ in self.rects].index(True)
+    idx = self.idx(die, pos)
     legal = self.fields[idx] is None and self.reqs[idx] == die.value
     legal_report(legal, die, pos)
     return idx, legal
+
+def orange_legal(self, die, pos):
+    idx = self.idx(die, pos)
+    legal = True
+    legal_report(legal, die, pos)
+    return idx, legal
+
 def blue_legal(self, dice, pos):
     wdie = dice.select("white")
     bdie = dice.select("blue")

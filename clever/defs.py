@@ -53,12 +53,20 @@ class Fields():
         else:
             return idx, False
 
+    def ids(self, die, pos):
+        return [_.bounds.collidepoint(pos) 
+                for _ in self.rects]
+
+    def idx(self, die, pos):
+        return self.ids(die, pos).index(True)
+
     def legal(self, die, pos):
-        idx = [_.bounds.collidepoint(pos) 
-                for _ in self.rects].index(True)
-        legal = self.fields[idx] is None
-        return idx, True
-        return True
+        idx = self.idx(die, pos)
+        print("testing", die, idx)
+        if idx is not None:
+            return idx, True
+        else: 
+            return None, False
 
     def bonus(self):
         return None
