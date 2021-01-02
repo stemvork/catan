@@ -33,6 +33,7 @@ def cross(tc, idx): # FIXME: won't work with white
             pos=(_bounds.x+_bounds.width/2, _bounds.y+_bounds.height/2))
 
 # FIXME: Die can be used indefinitely after using once..
+# FIXME: Wrong colour can be used for all but blue.
 # TODO: Move used die to silver plate
 
 roll = Dieset

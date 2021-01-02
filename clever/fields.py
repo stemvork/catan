@@ -123,9 +123,12 @@ class Orange(Fields):
         return [i for i, v in enumerate(self.reqs)
                if v == die.value]
 
-    def legal(self, die):
-        print('checking: legal to play orange')
-        return len(self.ids(die)) > 0
+    def legal(self, die, pos):
+        # FIXME: Fails if not pressing on a subregion
+        idx = [_.bounds.collidepoint(pos) 
+                for _ in self.rects].index(True)
+        legal = self.fields[idx] is None
+        return idx, True
 
     def play(self, dice, mouseclick, f, t):
         fpos, tpos = mouseclick
@@ -155,9 +158,20 @@ class Purple(Fields):
         return [i for i, v in enumerate(self.reqs)
                if v == die.value]
 
-    def legal(self, die):
-        print('checking: legal to play purple')
-        return len(self.ids(die)) > 0
+    def legal(self, die, pos):
+        # FIXME: Fails if not pressing on a subregion
+        idx = [_.bounds.collidepoint(pos) 
+                for _ in self.rects].index(True)
+        if idx > 0:
+            prev = self.fields[idx-1]
+            if prev == 6:
+                legal = True
+            else:
+                legal = self.fields[idx] is None and prev < die.value
+        else:
+            legal = True
+        legal_report(legal, die, pos)
+        return idx, legal
 
     def play(self, dice, mouseclick, f, t):
         fpos, tpos = mouseclick
