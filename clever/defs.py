@@ -30,17 +30,35 @@ def dprint(*args):
     print(*args) if DEBUG else None
 
 class Fields():
-    def __init__(self, n=11):
+    def __init__(self, n=11, **kwargs):
         self.fields = [None] * n
         self.reqs   = [None] * n
         self.boni   = [None] * n
         self.scores = [None] * n
 
-    def legal(self, dice):
-        return True
+        for key in kwargs:
+            self.__dict__[key] = kwargs[key]
 
-    def play(self, dice, pos):
-        return False
+    def play(self, dice, mouseclick, f, t):
+        fpos, tpos = mouseclick
+        fr, fc, tr, tc = *f, *t
+        die = dice.select(fc)
+
+        idx, legal = self.legal(die, tpos)
+
+        if legal:
+            self.fields[idx] = die.value
+            self.reqs[idx]   = None
+            return idx, True
+        else:
+            return idx, False
+
+    def legal(self, die, pos):
+        idx = [_.bounds.collidepoint(pos) 
+                for _ in self.rects].index(True)
+        legal = self.fields[idx] is None
+        return idx, True
+        return True
 
     def bonus(self):
         return None
